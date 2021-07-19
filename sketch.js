@@ -1,4 +1,5 @@
 var tom,tomImg1,tomImg2,tomImg3;
+
 var jerry,jerryImg1,jerryImg2,jerryImg3;
 var gardenImg,garden
 function preload() {
@@ -17,25 +18,30 @@ jerryImg3=loadAnimation("mouse4.png");
 function setup(){
     createCanvas(1000,800);
     //create tom and jerry sprites here
-tom=createSprite(200,150,10,10);
-tom.addImage("tom1",tomImg1);
+tom=createSprite(500,700,10,10);
+tom.addAnimation("tom1",tomImg1);
+tom.scale=0.2
 
-jerry=createSprite(200,150,10,10);
-jerry.addImage("jerry1",jerryImg1);
+jerry=createSprite(200,700,10,10);
+jerry.addAnimation("jerry1",jerryImg1);
+jerry.scale=0.15;
+
 }
 
 function draw() {
 
-    background(255);
-gardenImg.addImage("background",garden);
+    background(gardenImg);
+
     //Write condition here to evalute if tom and jerry collide
 if (tom.x-jerry.x < (tom.width - jerry.width)/2) {
     tom.velocityX=0
 tom.addAnimation("tomLastImage",tomImg3);
+tom.changeAnimation("tomLastImage")
 tom.x =300
 tom.scale=0.2;
 
 jerry.addAnimation("jerryLastImage", jerryImg3);
+jerry.changeAnimation("jerryLastImage")
 jerry.scale=0.15;
 }
     drawSprites();
@@ -45,20 +51,10 @@ jerry.scale=0.15;
 function keyPressed(){
 
   //For moving and changing animation write code here
-if (keyDown(LEFT_ARROW)) {
+if (keyCode===LEFT_ARROW) {
    tom.velocityX=-5;
     tom.addAnimation("tomRunning",tomImg2);
     tom.changeAnimation("tomRunning")
-
-    jerry.addAnimation("teasingmouse",jerryImg2);
-    jerry.changeAnimation("teasingmouse");
-    jerry.frameDelay=25
-}
-
-if (keyDown(RIGHT_ARROW)) {
-    tom.velocityX=-5;
-    tom.addAnimation("tomRunning",tomImg2);
-    tom.changeAnimation("tomRunning");
 
     jerry.addAnimation("teasingmouse",jerryImg2);
     jerry.changeAnimation("teasingmouse");
